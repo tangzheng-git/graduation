@@ -41,11 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
 
-    'users',
     'personage.apps.PersonageConfig',
 ]
-
-AUTH_USER_MODEL = 'users.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -208,3 +205,12 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = 'tangzheng972631576@163.com'
 EMAIL_HOST_PASSWORD = 'VVWQEBJRWGUVIUPB'
 DEFAULT_FROM_EMAIL = 'tangzheng <tangzheng972631576@163.com>'
+
+# 用户密码策略
+USERS_PASSWORD_POLICY = 0
+# 用户电子邮件域黑名单
+USERS_EMAIL_DOMAINS_BLACKLIST = []
+# 用户电子邮件域白名单
+USERS_EMAIL_DOMAINS_WHITELIST = []
+# 用户创建超级用户
+USERS_CREATE_SUPERUSER = True

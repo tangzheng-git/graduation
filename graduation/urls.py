@@ -32,7 +32,6 @@ sitemaps = {
 
 urlpatterns = [
     path(r'admin/', admin.site.urls),
-    url(r'^accounts/', include('users.urls')),
     path("", views.home),
     url(r'^personage/', include('personage.urls')),
 
