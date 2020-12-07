@@ -18,6 +18,10 @@ class BaseModel(models.Model):
     is_active = models.BooleanField(default=True, verbose_name=u'状态')
     create_time = models.DateTimeField(default=timezone.now, db_index=True, verbose_name=u'创建时间')
 
+    class Meta:
+        # 抽象类 不创建数据库 用户子类继承
+        abstract = True
+
     def __unicode__(self):
         if hasattr(self, 'name'):
             # <model pk: name>
