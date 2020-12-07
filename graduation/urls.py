@@ -15,7 +15,30 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import include, url
+from personage import views
+from django.conf.urls import url
+from django.contrib.sitemaps import GenericSitemap
+from django.contrib.sitemaps.views import sitemap
+
+from django.contrib.sitemaps import views as sitemaps_views
+from django.views.decorators.cache import cache_page
+from personage.models import User
+
+sitemaps = {
+    'user': GenericSitemap({'queryset': User.objects.all(), 'date_field': 'pub_date'}, priority=0.6),
+    # 如果还要加其它的可以模仿上面的
+}
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path(r'admin/', admin.site.urls),
+    url(r'^accounts/', include('users.urls')),
+    path("", views.home),
+    url(r'^personage/', include('personage.urls')),
+
+]
+
+urlpatterns += [
+    url(r'^sitemap\.xml$', cache_page(86400)(sitemaps_views.index), {'sitemaps': sitemaps, 'sitemap_url_name': 'sitemaps'}),
+    url(r'^sitemap-(?P<section>.+)\.xml$', cache_page(86400)(sitemaps_views.sitemap), {'sitemaps': sitemaps}, name='sitemaps'),
 ]
