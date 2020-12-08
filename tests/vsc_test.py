@@ -55,7 +55,7 @@ class VersionControl:
     @staticmethod
     def thread_cmd(cmd_str, number):
         print('{} {} 开始'.format(number, cmd_str))
-
+        os.system(cmd_str)
         print('{} {} 结束'.format(number, cmd_str))
 
     @staticmethod
@@ -99,7 +99,7 @@ commit_str = vsc.commit_branch(message, filename)
 command_list = vsc.push_branch(branch)
 cmd_dict = {
     'cmd_list': command_list,
-    'cmd_str': commit_str,
+    'cmd_str': None,
 }
 
 vsc.run(**cmd_dict)
